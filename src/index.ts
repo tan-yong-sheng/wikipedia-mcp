@@ -85,6 +85,7 @@ class WikipediaServer {
       explaintext: 'true',
       piprop: 'thumbnail',
       pithumbsize: '300',
+      redirects: 'true',
       format: 'json'
     });
 
@@ -122,7 +123,8 @@ class WikipediaServer {
       prop: 'extracts',
       titles: title,
       exintro: 'false',
-      explaintext: 'false',
+      explaintext: 'true',
+      redirects: 'true',
       format: 'json'
     });
 
@@ -159,6 +161,7 @@ class WikipediaServer {
       action: 'parse',
       page: title,
       prop: 'sections',
+      redirects: 'true',
       format: 'json'
     });
 
@@ -196,6 +199,7 @@ class WikipediaServer {
       prop: 'links',
       titles: title,
       pllimit: '500',
+      redirects: 'true',
       format: 'json'
     });
 

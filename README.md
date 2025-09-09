@@ -5,7 +5,7 @@ A Model Context Protocol (MCP) server for searching and retrieving Wikipedia art
 ## Quick Start
 
 Make sure to set up your environment variables first:
-- `WIKIPEDIA_USER_AGENT` (required, should include contact information)
+- `WIKIPEDIA_USER_AGENT` (optional, default: `Wikipedia-MCP/1.0 (https://github.com/user/wikipedia-mcp; contact@example.com)`)
 - `WIKIPEDIA_LANGUAGE` (optional, default: 'en')
 - `WIKIPEDIA_REQUEST_DELAY` (optional, default: 1000ms)
 - `WIKIPEDIA_TIMEOUT` (optional, default: 30000ms)
@@ -25,6 +25,25 @@ Add the server config to your Claude Desktop configuration file:
     "/k",
     "npx",
     "-y",
+    "wikipedia-mcp"
+  ],
+  "env": {
+    "WIKIPEDIA_USER_AGENT": "MyApp/1.0 (https://mywebsite.com; me@mywebsite.com)",
+    "WIKIPEDIA_LANGUAGE": "en",
+    "WIKIPEDIA_REQUEST_DELAY": "1000"
+  }
+}
+```
+
+OR
+
+```json
+"wikipedia-mcp": {
+  "command": "cmd",
+  "args": [
+    "/k",
+    "npx",
+    "-y",
     "git+https://github.com/tan-yong-sheng/wikipedia-mcp.git",
     "wikipedia-mcp"
   ],
@@ -36,7 +55,25 @@ Add the server config to your Claude Desktop configuration file:
 }
 ```
 
+
 #### For NPX Installation from GitHub (on Linux/macOS)
+
+```json
+"wikipedia-mcp": {
+  "command": "npx",
+  "args": [
+    "-y",
+    "wikipedia-mcp"
+  ],
+  "env": {
+    "WIKIPEDIA_USER_AGENT": "MyApp/1.0 (https://mywebsite.com; me@mywebsite.com)",
+    "WIKIPEDIA_LANGUAGE": "en",
+    "WIKIPEDIA_REQUEST_DELAY": "1000"
+  }
+}
+```
+
+OR
 
 ```json
 "wikipedia-mcp": {
