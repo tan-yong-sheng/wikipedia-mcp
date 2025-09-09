@@ -37,9 +37,9 @@ This is a **Model Context Protocol (MCP) server** that provides Wikipedia search
 - `search_wikipedia`: Search articles with query and optional limit
 - `get_summary`: Get page summary with extract and metadata (with case-insensitive fallback)
 - `get_article`: Retrieve full article content of pages (with case-insensitive fallback)
-- `get_sections`: Get page section outline/table of contents
-- `get_links`: Get links from page to other Wikipedia articles  
-- `get_related_topics`: Get related links and categories from a page with summaries
+- `get_sections`: Get page section outline/table of contents (with case-insensitive fallback)
+- `get_links`: Get links from page to other Wikipedia articles (with case-insensitive fallback)
+- `get_related_topics`: Get related links and categories from a page with summaries (with case-insensitive fallback)
 
 ### Configuration
 
@@ -66,7 +66,7 @@ Rate limiting is automatically enforced to respect Wikipedia's guidelines with c
 The server now handles case sensitivity issues automatically:
 - If a direct title lookup fails, it uses the search API to find the correct title
 - This resolves issues with variations like 'anwar ibrahim' vs 'Anwar Ibrahim'
-- Applies to `get_summary`, `get_article`, and `get_related_topics` functions
+- Applies to `get_summary`, `get_article`, `get_sections`, `get_links`, and `get_related_topics` functions
 
 ## Important Notes
 

@@ -139,6 +139,8 @@ The server provides the following tools for Wikipedia research:
 ### Case-Insensitive Access
 - "Get summary for 'anwar ibrahim'" (automatically finds 'Anwar Ibrahim')
 - "Get article content for 'quantum computing'" (automatically finds correct capitalization)
+- "Get sections for 'climate change'" (works with any case variation)
+- "Get links from 'python programming language'" (handles case sensitivity)
 - Works with any title variations - the server uses search fallback for exact matches
 
 ### Multilingual Research

@@ -169,7 +169,6 @@ class WikipediaServer {
       action: 'parse',
       page: title,
       prop: 'sections',
-      redirects: 'true',
       format: 'json'
     });
 
@@ -190,7 +189,8 @@ class WikipediaServer {
 
       const data = await response.json();
       if (data.error) {
-        throw new Error(`Wikipedia API error: ${data.error.info}`);
+        // Don't throw here - let the MCP handler deal with it for fallback
+        return data;
       }
       
       return data;
@@ -534,7 +534,17 @@ server.registerTool(
   },
   async ({ title }) => {
     try {
-      const sections = await wikipediaServer.getPageSections(title);
+      let sections = await wikipediaServer.getPageSections(title);
+      
+      // If not found, try searching for correct title
+      // The parse API returns different error structures than query API
+      if (!sections.parse || sections.error) {
+        const correctTitle = await wikipediaServer['findCorrectTitle'](title);
+        if (correctTitle && correctTitle !== title) {
+          sections = await wikipediaServer.getPageSections(correctTitle);
+          title = correctTitle; // Use correct title for response
+        }
+      }
       
       if (!sections.parse || !sections.parse.sections) {
         return {
@@ -588,7 +598,16 @@ server.registerTool(
   },
   async ({ title }) => {
     try {
-      const linksData = await wikipediaServer.getPageLinks(title);
+      let linksData = await wikipediaServer.getPageLinks(title);
+      
+      // If not found, try searching for correct title
+      if (!linksData.query || !linksData.query.pages || Object.values(linksData.query.pages)[0]?.hasOwnProperty('missing')) {
+        const correctTitle = await wikipediaServer['findCorrectTitle'](title);
+        if (correctTitle) {
+          linksData = await wikipediaServer.getPageLinks(correctTitle);
+          title = correctTitle; // Use correct title for response
+        }
+      }
       
       if (!linksData.query || !linksData.query.pages) {
         return {
