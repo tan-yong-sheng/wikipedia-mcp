@@ -130,7 +130,6 @@ class WikipediaServer {
       action: 'query',
       prop: 'extracts',
       titles: title,
-      exintro: 'false',
       explaintext: 'true',
       redirects: 'true',
       format: 'json'
