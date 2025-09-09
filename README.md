@@ -16,7 +16,7 @@ Make sure to set up your environment variables first:
 
 Add the server config to your Claude Desktop configuration file:
 
-#### For Local Installation (on Windows)
+#### For NPX Installation from GitHub (on Windows)
 
 ```json
 "wikipedia-mcp": {
@@ -25,7 +25,8 @@ Add the server config to your Claude Desktop configuration file:
     "/k",
     "npx",
     "-y",
-    "git+https://github.com/tan-yong-sheng/wikipedia-mcp.git"
+    "git+https://github.com/tan-yong-sheng/wikipedia-mcp.git",
+    "wikipedia-mcp"
   ],
   "env": {
     "WIKIPEDIA_USER_AGENT": "MyApp/1.0 (https://mywebsite.com; me@mywebsite.com)",
@@ -35,14 +36,15 @@ Add the server config to your Claude Desktop configuration file:
 }
 ```
 
-#### For Local Installation (on Linux/macOS)
+#### For NPX Installation from GitHub (on Linux/macOS)
 
 ```json
 "wikipedia-mcp": {
   "command": "npx",
   "args": [
     "-y",
-    "git+https://github.com/tan-yong-sheng/wikipedia-mcp.git"
+    "git+https://github.com/tan-yong-sheng/wikipedia-mcp.git",
+    "wikipedia-mcp"
   ],
   "env": {
     "WIKIPEDIA_USER_AGENT": "MyApp/1.0 (https://mywebsite.com; me@mywebsite.com)",

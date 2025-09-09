@@ -1,6 +1,6 @@
 {
   "name": "wikipedia-mcp",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "MCP server for searching and retrieving Wikipedia articles",
   "main": "dist/index.js",
   "type": "module",
@@ -14,7 +14,8 @@
     "verify": "echo 'No verify step'",
     "quick-check": "tsc --noEmit --skipLibCheck",
     "test-build": "npm run typecheck && npm run build && echo 'All checks passed!'",
-    "lint": "echo 'TypeScript compilation serves as linting' && npm run typecheck"
+    "lint": "echo 'TypeScript compilation serves as linting' && npm run typecheck",
+    "prepare": "npm run build"
   },
   "keywords": [
     "mcp",
@@ -26,17 +27,25 @@
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
-    "zod": "^3.22.0"
+    "zod": "^3.22.0",
+    "tsx": "^4.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
     "typescript": "^5.0.0",
     "rimraf": "^5.0.0"
   },
+  "bin": {
+    "wikipedia-mcp": "./bin.js"
+  },
+  "files": [
+    "dist/**/*",
+    "src/**/*",
+    "bin.js",
+    "README.md",
+    "package.json"
+  ],
   "engines": {
     "node": ">=18.0.0"
-  },
-  "bin": {
-    "wikipedia-mcp": "./dist/index.js"
   }
 }
