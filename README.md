@@ -25,7 +25,7 @@ Add the server config to your Claude Desktop configuration file:
     "/k",
     "npx",
     "-y",
-    "wikipedia-mcp"
+    "@tan-yong-sheng/wikipedia-mcp"
   ],
   "env": {
     "WIKIPEDIA_USER_AGENT": "MyApp/1.0 (https://mywebsite.com; me@mywebsite.com)",
@@ -34,27 +34,6 @@ Add the server config to your Claude Desktop configuration file:
   }
 }
 ```
-
-OR
-
-```json
-"wikipedia-mcp": {
-  "command": "cmd",
-  "args": [
-    "/k",
-    "npx",
-    "-y",
-    "git+https://github.com/tan-yong-sheng/wikipedia-mcp.git",
-    "wikipedia-mcp"
-  ],
-  "env": {
-    "WIKIPEDIA_USER_AGENT": "MyApp/1.0 (https://mywebsite.com; me@mywebsite.com)",
-    "WIKIPEDIA_LANGUAGE": "en",
-    "WIKIPEDIA_REQUEST_DELAY": "1000"
-  }
-}
-```
-
 
 #### For NPX Installation from GitHub (on Linux/macOS)
 
@@ -63,25 +42,7 @@ OR
   "command": "npx",
   "args": [
     "-y",
-    "wikipedia-mcp"
-  ],
-  "env": {
-    "WIKIPEDIA_USER_AGENT": "MyApp/1.0 (https://mywebsite.com; me@mywebsite.com)",
-    "WIKIPEDIA_LANGUAGE": "en",
-    "WIKIPEDIA_REQUEST_DELAY": "1000"
-  }
-}
-```
-
-OR
-
-```json
-"wikipedia-mcp": {
-  "command": "npx",
-  "args": [
-    "-y",
-    "git+https://github.com/tan-yong-sheng/wikipedia-mcp.git",
-    "wikipedia-mcp"
+    "@tan-yong-sheng/wikipedia-mcp"
   ],
   "env": {
     "WIKIPEDIA_USER_AGENT": "MyApp/1.0 (https://mywebsite.com; me@mywebsite.com)",
@@ -154,6 +115,13 @@ The server provides the following tools for Wikipedia research:
   - Parameters: title (string)
   - Returns: List of linked Wikipedia articles with URLs
 
+### Discovery Tools
+
+- `get_related_topics` - Get related links and categories from a page with summaries
+  - Find topics related to a Wikipedia page through its links and categories
+  - Parameters: title (string), limit (number, optional, default: 10)
+  - Returns: Related links with summaries and categories, up to specified limit
+
 ## Example Queries
 
 ### Research & Discovery
@@ -161,11 +129,17 @@ The server provides the following tools for Wikipedia research:
 - "Get a summary of the 'Artificial Intelligence' Wikipedia page"
 - "Show me the table of contents for the 'Climate Change' article"
 - "Find all the links from the 'Python programming language' page"
+- "Get related topics for 'anwar ibrahim' with summaries"
 
 ### Content Access
 - "Get the full content of the 'Quantum Computing' Wikipedia article"
 - "Search for 'renewable energy' and get summaries of the first 3 results"
 - "Show me the structure of the 'World War II' article"
+
+### Case-Insensitive Access
+- "Get summary for 'anwar ibrahim'" (automatically finds 'Anwar Ibrahim')
+- "Get article content for 'quantum computing'" (automatically finds correct capitalization)
+- Works with any title variations - the server uses search fallback for exact matches
 
 ### Multilingual Research
 - "Search French Wikipedia for 'intelligence artificielle'" (set WIKIPEDIA_LANGUAGE=fr)
@@ -197,6 +171,8 @@ export WIKIPEDIA_REQUEST_DELAY="1500"
 - **Get Full Content**: Access complete article content
 - **Get Page Sections**: Get section outline/table of contents
 - **Get Page Links**: Get links from pages to other Wikipedia articles
+- **Get Related Topics**: Get related links and categories with summaries
+- **Case-Insensitive Access**: Automatic fallback to search API for title variations
 - **Rate Limiting**: Built-in request throttling to respect Wikipedia's API limits
 - **Configurable**: Environment variable support for customization
 - **Multilingual**: Support for all Wikipedia language editions
@@ -209,6 +185,7 @@ This server uses the MediaWiki Action API exclusively (`/w/api.php`):
 - **Content**: `action=query&prop=extracts` for full article content  
 - **Sections**: `action=parse&prop=sections` for page section outline
 - **Links**: `action=query&prop=links` for page links
+- **Related Topics**: `action=query&prop=links|categories` for related content
 
 ## Rate Limiting
 

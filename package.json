@@ -1,5 +1,5 @@
 {
-  "name": "wikipedia-mcp",
+  "name": "@tan-yong-sheng/wikipedia-mcp",
   "version": "0.0.1",
   "description": "MCP server for searching and retrieving Wikipedia articles",
   "main": "dist/index.js",
@@ -36,7 +36,7 @@
     "rimraf": "^5.0.0"
   },
   "bin": {
-    "wikipedia-mcp": "./bin.js"
+    "wikipedia-mcp": "bin.js"
   },
   "files": [
     "dist/**/*",
